@@ -8,6 +8,7 @@ export const ButtonSubmit = styled.button`
     border-radius: 8px;
     transition: 0.1s;
     :active {
+        transform: translateY(20%);
         background-color: #22c55e;
     }
 `;

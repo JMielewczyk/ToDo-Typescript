@@ -9,10 +9,13 @@ export const AppWrapp = styled.main`
     max-width: 900px;
     border-radius: 15px;
     overflow: hidden;
-    padding: 20px;
+    padding: 10px;
     background: linear-gradient(
         to right bottom,
-        rgba(255, 255, 255, 0.7),
-        rgba(255, 255, 255, 0.3)
+        rgba(10, 10, 10, 0.7),
+        rgba(10, 10, 10, 0.3)
     );
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.3);
 `;

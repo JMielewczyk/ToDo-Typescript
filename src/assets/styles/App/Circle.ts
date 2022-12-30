@@ -4,8 +4,8 @@ export const Circle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px;
-    height: 30px;
+    min-width: 25px;
+    min-height: 25px;
     border: 1px solid black;
     border-radius: 100%;
     &.done {
