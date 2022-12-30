@@ -6,5 +6,5 @@ export const TasksWrapp = styled.section`
     width: 100%;
     flex-grow: 1;
     grid-auto-rows: min-content;
-    overflow-y: scroll;
+    overflow-y: auto;
 `;

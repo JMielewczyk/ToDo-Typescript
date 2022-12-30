@@ -1,6 +1,11 @@
 //hooks
 import React, { useState } from 'react';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
+
+//routes
+import All from './assets/routes/All';
+import ToDo from './assets/routes/ToDo';
+import Done from './assets/routes/Done';
 
 //styles
 import { AppWrapp } from './assets/styles/App/AppWrapp';
@@ -8,22 +13,15 @@ import { Form } from './assets/styles/App/Form';
 import { H1 } from './assets/styles/App/H1';
 import { Input } from './assets/styles/App/Input';
 import { ButtonSubmit } from './assets/styles/App/ButtonSubmit';
-import { Task } from './assets/styles/App/Task';
 import { TasksWrapp } from './assets/styles/App/TasksWrapp';
-import { Circle } from './assets/styles/App/Circle';
-import { Trash } from './assets/styles/App/Trash';
 import Global from './assets/styles/Global';
 
 //FontAwesome
-import {
-    faS,
-    faCheck,
-    faTrash,
-    faArrowDown,
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Links } from './assets/styles/App/Links';
 
-interface Task {
+export interface ITask {
     id: number;
     description: string;
     isDone: boolean;
@@ -32,7 +30,7 @@ interface Task {
 function App() {
     const [inputValue, setInputValue] = useState('');
     const [isInputEmpty, setIsInputEmpty] = useState(false);
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const [tasks, setTasks] = useState<ITask[]>([]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -46,12 +44,13 @@ function App() {
             return;
         }
         const randomID: number = Math.floor(Math.random() * 100000);
-        const task = {
+        const task: ITask = {
             id: randomID,
             description: inputValue,
             isDone: false,
         };
         setTasks((prevState) => [...prevState, task]);
+        setInputValue('');
     };
 
     const handleTaskActions = (action: string, id: number) => {
@@ -79,23 +78,6 @@ function App() {
         removeTask: 'removeTask',
     };
 
-    const mapTasks = tasks.map((task) => (
-        <Task key={task.id}>
-            <Circle
-                onClick={() => handleTaskActions(actions.toggleDone, task.id)}
-                className={task.isDone === true ? 'done' : undefined}
-            >
-                <FontAwesomeIcon icon={faCheck} />
-            </Circle>
-            <p>{task.description}</p>
-            <Trash
-                onClick={() => handleTaskActions(actions.removeTask, task.id)}
-            >
-                <FontAwesomeIcon icon={faTrash} />
-            </Trash>
-        </Task>
-    ));
-
     return (
         <HashRouter>
             <Global />
@@ -118,7 +100,45 @@ function App() {
                         <FontAwesomeIcon icon={faArrowDown} />
                     </ButtonSubmit>
                 </Form>
-                <TasksWrapp>{tasks.length > 0 && mapTasks}</TasksWrapp>
+                <TasksWrapp>
+                    <Routes>
+                        <Route
+                            path="/all"
+                            element={
+                                <All
+                                    tasks={tasks}
+                                    handleTaskActions={handleTaskActions}
+                                    actions={actions}
+                                />
+                            }
+                        ></Route>
+                        <Route
+                            path="/todo"
+                            element={
+                                <ToDo
+                                    tasks={tasks}
+                                    handleTaskActions={handleTaskActions}
+                                    actions={actions}
+                                />
+                            }
+                        ></Route>
+                        <Route
+                            path="/done"
+                            element={
+                                <Done
+                                    tasks={tasks}
+                                    handleTaskActions={handleTaskActions}
+                                    actions={actions}
+                                />
+                            }
+                        ></Route>
+                    </Routes>
+                </TasksWrapp>
+                <Links>
+                    <NavLink to="all">All</NavLink>
+                    <NavLink to="todo">ToDo</NavLink>
+                    <NavLink to="done">Done</NavLink>
+                </Links>
             </AppWrapp>
         </HashRouter>
     );
