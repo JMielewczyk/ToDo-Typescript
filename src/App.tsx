@@ -1,5 +1,5 @@
 //hooks
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
 
 //routes
@@ -30,12 +30,23 @@ export interface ITask {
 function App() {
     const [inputValue, setInputValue] = useState('');
     const [isInputEmpty, setIsInputEmpty] = useState(false);
-    const [tasks, setTasks] = useState<ITask[]>([]);
+    const [tasks, setTasks] = useState<ITask[]>(() => {
+        const storageTasks = localStorage.getItem('tasks');
+        if (typeof storageTasks === 'string') {
+            return JSON.parse(storageTasks);
+        } else {
+            return [];
+        }
+    });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
         setIsInputEmpty(false);
     };
+
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, [tasks]);
 
     const handleSubmit = (e: React.KeyboardEvent<HTMLFormElement>) => {
         e.preventDefault();
