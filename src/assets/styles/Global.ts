@@ -16,6 +16,6 @@ export default createGlobalStyle`
     width: 100vw;
     height: 100vh;
     padding: 20px;
-    background-color: #1e293b;
+    background-image: linear-gradient( to right bottom,  rgba(44,62,78,1) 12.6%, rgba(69,103,131,1) 82.8% );
  }
 `;

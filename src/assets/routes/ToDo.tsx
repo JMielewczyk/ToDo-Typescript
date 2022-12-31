@@ -5,10 +5,21 @@ import { IProps } from './All';
 
 //features
 import { renderTasks } from '../../features/renderTasks';
+import { handleTaskActions } from '../../features/handleTaskActions';
 
-const ToDo = ({ tasks, handleTaskActions, actions }: IProps) => {
-    const filteredTasks = tasks.filter((task) => task.isDone !== true);
-    return <>{renderTasks(filteredTasks, handleTaskActions, actions)}</>;
+const ToDo = ({ tasks, setTasks, actions }: IProps) => {
+    const toDoTasks = tasks.filter((task) => task.isDone !== true);
+    return (
+        <>
+            {renderTasks(
+                toDoTasks,
+                handleTaskActions,
+                actions,
+                tasks,
+                setTasks
+            )}
+        </>
+    );
 };
 
 export default ToDo;
