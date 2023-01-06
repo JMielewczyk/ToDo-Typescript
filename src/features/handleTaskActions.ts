@@ -1,3 +1,4 @@
+import { faBreadSlice } from '@fortawesome/free-solid-svg-icons';
 import { ITask } from '../App';
 
 export interface IHandleTaskActions {
@@ -16,6 +17,7 @@ export interface IActions {
     editTask: 'editTask';
     pushNewText: 'pushNewText';
     moreOptions: 'moreOptions';
+    deleteContainer: 'deleteContainer';
 }
 
 export const actions: IActions = {
@@ -24,6 +26,7 @@ export const actions: IActions = {
     editTask: 'editTask',
     pushNewText: 'pushNewText',
     moreOptions: 'moreOptions',
+    deleteContainer: 'deleteContainer',
 };
 
 export const handleTaskActions: IHandleTaskActions = (
@@ -68,6 +71,7 @@ export const handleTaskActions: IHandleTaskActions = (
                 }
             });
             setTasks(newTextArray);
+            break;
         case actions.moreOptions:
             const newMoreOptionsTask = [...tasks];
             newMoreOptionsTask.forEach((object) => {
@@ -81,6 +85,19 @@ export const handleTaskActions: IHandleTaskActions = (
                     : null;
                 setTasks(newMoreOptionsTask);
             });
+            break;
+        case actions.deleteContainer:
+            const newDeleteContainerTask = [...tasks];
+            newDeleteContainerTask.forEach((object) => {
+                if (object.id === id) {
+                    object.deleteContainerActive =
+                        !object.deleteContainerActive;
+                } else {
+                    object.deleteContainerActive = false;
+                }
+            });
+            setTasks(newDeleteContainerTask);
+            break;
         default:
             return tasks;
     }

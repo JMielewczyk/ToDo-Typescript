@@ -4,7 +4,7 @@ export const OptionsArrow = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 100%;
     height: 100%;
     background-color: white;
     border-right: 1px solid black;

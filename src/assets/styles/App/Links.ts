@@ -10,6 +10,7 @@ export const Links = styled.div`
     margin: 0 -20px 0 -20px; // to ignore parent padding &  fit border top to contener
     padding: 0 20px;
     padding-top: 20px;
+    flex-shrink: 0;
     & a {
         display: flex;
         justify-content: center;
