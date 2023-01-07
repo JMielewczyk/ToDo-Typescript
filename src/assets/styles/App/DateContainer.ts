@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../mediaQueries/breakpoints';
 import { OptionContainer } from './OptionContainer';
 
 export const DateContainer = styled(OptionContainer)`
@@ -21,6 +22,12 @@ export const DateContainer = styled(OptionContainer)`
         width: 100%;
         & div {
             border-right: 1px solid black;
+        }
+    }
+    @media ${device.tablet} {
+        justify-content: flex-start;
+        &.active {
+            width: 250px;
         }
     }
 `;
