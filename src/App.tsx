@@ -18,6 +18,7 @@ import Global from './assets/styles/Global';
 
 //fontAwesome
 import { faArrowDown, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Links } from './assets/styles/App/Links';
 
@@ -43,6 +44,7 @@ import { OptionsContainer } from './assets/styles/App/OptionsContainer';
 import { CircleOptions } from './assets/styles/App/CircleOptions';
 import { OptionContainer } from './assets/styles/App/OptionContainer';
 import { DateContainer } from './assets/styles/App/DateContainer';
+import { FooterWrap } from './assets/styles/Footer/FooterWrap';
 
 function App() {
     const [inputValue, setInputValue] = useState('');
@@ -238,6 +240,17 @@ function App() {
                     <NavLink to="done">Done</NavLink>
                 </Links>
             </AppWrapp>
+            <FooterWrap>
+                <p>Created by: Jakub Mielewczyk</p>
+                <div>
+                    <a href="https://www.linkedin.com/in/jakub-mielewczyk-b411a6221/">
+                        <FontAwesomeIcon icon={faLinkedin} />
+                    </a>
+                    <a href="https://github.com/JMielewczyk">
+                        <FontAwesomeIcon icon={faGithub} />
+                    </a>
+                </div>
+            </FooterWrap>
         </HashRouter>
     );
 }
