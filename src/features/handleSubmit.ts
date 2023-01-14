@@ -1,19 +1,5 @@
 //interfaces
-import { ITask } from '../App';
-
-export interface IHandleSubmit {
-    (
-        e: React.FormEvent<HTMLFormElement>,
-        inputValue: string,
-        setInputValue: React.Dispatch<React.SetStateAction<string>>,
-        setIsInputEmpty: React.Dispatch<React.SetStateAction<boolean>>,
-        setTasks: React.Dispatch<React.SetStateAction<ITask[]>>,
-        dateOption: boolean,
-        date: string,
-        priorityOption: string,
-        flag: boolean
-    ): void;
-}
+import { IHandleSubmit, ITask } from '../Interfaces/interfaces';
 
 export const handleSubmit: IHandleSubmit = (
     e,

@@ -1,23 +1,12 @@
-import React, { ReactEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 
 //interfaces
-import { ITask } from '../App';
-import { IActions, IHandleTaskActions } from './handleTaskActions';
+import { IActions, IHandleTaskActions, ITask } from '../Interfaces/interfaces';
 
 //styles
 import { Task } from '../assets/styles/App/Task';
 import { Trash } from '../assets/styles/App/Trash';
 import { Circle } from '../assets/styles/App/Circle';
-
-//fontAwesome
-import {
-    faCheck,
-    faTrash,
-    faArrowDown,
-    faEllipsisVertical,
-} from '@fortawesome/free-solid-svg-icons';
-import { faFlag } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container } from '../assets/styles/App/Container';
 import { BtnEditSubmit } from '../assets/styles/App/BtnEditSubmit';
 import { RightContainer } from '../assets/styles/App/RightContainer';
@@ -26,6 +15,14 @@ import { SecondContainer } from '../assets/styles/App/SecondContainer';
 import { LeftContainer } from '../assets/styles/App/LeftContainer';
 import { EditContainer } from '../assets/styles/App/EditContainer';
 import { DeleteContainer } from '../assets/styles/App/DeleteContainer';
+import {
+    faCheck,
+    faTrash,
+    faArrowDown,
+    faEllipsisVertical,
+} from '@fortawesome/free-solid-svg-icons';
+import { faFlag } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const renderTasks = (
     array: Array<ITask>,

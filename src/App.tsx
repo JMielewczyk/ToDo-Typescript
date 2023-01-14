@@ -3,48 +3,27 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
 
 //routes
-import All from './assets/routes/All';
-import ToDo from './assets/routes/ToDo';
-import Done from './assets/routes/Done';
+import All from './Routes/All';
+import ToDo from './Routes/ToDo';
+import Done from './Routes/Done';
 
 //styles
-import { AppWrapp } from './assets/styles/App/AppWrapp';
-import { Form } from './assets/styles/App/Form';
-import { H1 } from './assets/styles/App/H1';
-import { Input } from './assets/styles/App/Input';
-import { ButtonSubmit } from './assets/styles/App/ButtonSubmit';
-import { TasksWrapp } from './assets/styles/App/TasksWrapp';
 import Global from './assets/styles/Global';
-
-//fontAwesome
-import { faArrowDown, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AppWrapp } from './assets/styles/App/AppWrapp';
+import { H1 } from './assets/styles/App/H1';
+import { TasksWrapp } from './assets/styles/App/TasksWrapp';
 import { Links } from './assets/styles/App/Links';
 
 //interfaces
-export interface ITask {
-    id: number;
-    description: string;
-    isDone: boolean;
-    editIsActive: boolean;
-    moreOptions?: boolean;
-    deleteContainerActive?: boolean;
-    dateOption: boolean;
-    date: string;
-    priorityOption: string;
-    flagOption: boolean;
-}
+import { ITask } from './Interfaces/interfaces';
 
 //features
-import { actions } from './features/handleTaskActions';
-import { handleSubmit, IHandleSubmit } from './features/handleSubmit';
-import { AdditionalContainer } from './assets/styles/App/AdditionalContainer';
-import { OptionsContainer } from './assets/styles/App/OptionsContainer';
-import { CircleOptions } from './assets/styles/App/CircleOptions';
-import { OptionContainer } from './assets/styles/App/OptionContainer';
-import { DateContainer } from './assets/styles/App/DateContainer';
-import { FooterWrap } from './assets/styles/Footer/FooterWrap';
+import { actions } from './Features/handleTaskActions';
+
+//components
+import Header from './Components/Header';
+import Options from './Components/AdditionalContainer';
+import Footer from './Components/Footer';
 
 function App() {
     const [inputValue, setInputValue] = useState('');
@@ -72,123 +51,35 @@ function App() {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }, [tasks]);
 
-    console.log(tasks);
     return (
         <HashRouter>
             <Global />
             <AppWrapp>
                 <H1>ToDo</H1>
-                <Form
-                    onSubmit={(e) =>
-                        handleSubmit(
-                            e,
-                            inputValue,
-                            setInputValue,
-                            setIsInputEmpty,
-                            setTasks,
-                            dateOption,
-                            date,
-                            priorityOption,
-                            flagOption
-                        )
-                    }
-                >
-                    <Input
-                        onChange={handleInputChange}
-                        value={inputValue}
-                        placeholder={
-                            isInputEmpty === true
-                                ? 'Task cannot be empty, write here...'
-                                : 'New task write here ....'
-                        }
-                        className={
-                            isInputEmpty === true ? 'warning' : undefined
-                        }
-                    />
-                    <ButtonSubmit type="submit">
-                        <FontAwesomeIcon icon={faArrowDown} />
-                    </ButtonSubmit>
-                </Form>
-                <AdditionalContainer
-                    className={moreOptionsActive ? 'active' : undefined}
-                >
-                    <button
-                        onClick={() => {
-                            setMoreOptionsActive((prevState) => !prevState);
-                        }}
-                    >
-                        More options <FontAwesomeIcon icon={faArrowDown} />
-                    </button>
-                    <OptionsContainer>
-                        <DateContainer
-                            className={dateOption ? 'active' : undefined}
-                        >
-                            <div>
-                                Date:
-                                <CircleOptions
-                                    style={
-                                        dateOption
-                                            ? { backgroundColor: '#4ade80' }
-                                            : undefined
-                                    }
-                                    onClick={() => {
-                                        setDateOption(
-                                            (prevState) => !prevState
-                                        );
-                                        if (dateOption === false) {
-                                            setDate(
-                                                new Date().toLocaleDateString(
-                                                    'en-CA'
-                                                )
-                                            );
-                                        }
-                                    }}
-                                >
-                                    {dateOption && (
-                                        <FontAwesomeIcon icon={faCheck} />
-                                    )}
-                                </CircleOptions>
-                            </div>
-                            <input
-                                onChange={(e) => setDate(e.target.value)}
-                                value={date}
-                                type="date"
-                            />
-                        </DateContainer>
-                        <OptionContainer>
-                            <label htmlFor="priority">Priority:</label>
-                            <select
-                                value={priorityOption}
-                                onChange={(e) => {
-                                    setPriorityOption(e.target.value);
-                                }}
-                                id="priority"
-                            >
-                                <option value="">None</option>
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                            </select>
-                        </OptionContainer>
-                        <OptionContainer>
-                            Flag:
-                            <CircleOptions
-                                style={
-                                    flagOption
-                                        ? { backgroundColor: '#4ade80' }
-                                        : undefined
-                                }
-                                onClick={() =>
-                                    setFlagOption((prevState) => !prevState)
-                                }
-                            >
-                                {flagOption && (
-                                    <FontAwesomeIcon icon={faCheck} />
-                                )}
-                            </CircleOptions>
-                        </OptionContainer>
-                    </OptionsContainer>
-                </AdditionalContainer>
+                <Header
+                    handleInputChange={handleInputChange}
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    setIsInputEmpty={setIsInputEmpty}
+                    setTasks={setTasks}
+                    dateOption={dateOption}
+                    date={date}
+                    priorityOption={priorityOption}
+                    flagOption={flagOption}
+                    isInputEmpty={isInputEmpty}
+                />
+                <Options
+                    moreOptionsActive={moreOptionsActive}
+                    setMoreOptionsActive={setMoreOptionsActive}
+                    dateOption={dateOption}
+                    setDateOption={setDateOption}
+                    setDate={setDate}
+                    date={date}
+                    priorityOption={priorityOption}
+                    setPriorityOption={setPriorityOption}
+                    flagOption={flagOption}
+                    setFlagOption={setFlagOption}
+                />
                 <TasksWrapp>
                     <Routes>
                         <Route path="/" element={<Navigate to="/all" />} />
@@ -240,17 +131,7 @@ function App() {
                     <NavLink to="done">Done</NavLink>
                 </Links>
             </AppWrapp>
-            <FooterWrap>
-                <p>Created by: Jakub Mielewczyk</p>
-                <div>
-                    <a href="https://www.linkedin.com/in/jakub-mielewczyk-b411a6221/">
-                        <FontAwesomeIcon icon={faLinkedin} />
-                    </a>
-                    <a href="https://github.com/JMielewczyk">
-                        <FontAwesomeIcon icon={faGithub} />
-                    </a>
-                </div>
-            </FooterWrap>
+            <Footer />
         </HashRouter>
     );
 }

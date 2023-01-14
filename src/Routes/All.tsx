@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
 //interfaces
-import { ITask } from '../../App';
-import { IActions } from '../../features/handleTaskActions';
+import { ITask } from '../App';
+import { IActions } from '../Features/handleTaskActions';
 
 export interface IProps {
     tasks: Array<ITask>;
@@ -11,8 +11,8 @@ export interface IProps {
 }
 
 //features
-import { renderTasks } from '../../features/renderTasks';
-import { handleTaskActions } from '../../features/handleTaskActions';
+import { renderTasks } from '../Features/renderTasks';
+import { handleTaskActions } from '../Features/handleTaskActions';
 
 const All = ({ tasks, setTasks, actions }: IProps) => {
     const mapAllTasks = [...tasks];

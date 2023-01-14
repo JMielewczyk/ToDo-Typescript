@@ -1,24 +1,5 @@
-import { faBreadSlice } from '@fortawesome/free-solid-svg-icons';
-import { ITask } from '../App';
-
-export interface IHandleTaskActions {
-    (
-        action: string,
-        id: number,
-        tasks: Array<ITask>,
-        setTasks: React.Dispatch<React.SetStateAction<ITask[]>>,
-        newText?: string
-    ): void;
-}
-
-export interface IActions {
-    toggleDone: 'toggleDone';
-    removeTask: 'removeTask';
-    editTask: 'editTask';
-    pushNewText: 'pushNewText';
-    moreOptions: 'moreOptions';
-    deleteContainer: 'deleteContainer';
-}
+//interfaces
+import { IActions, IHandleTaskActions } from '../Interfaces/interfaces';
 
 export const actions: IActions = {
     toggleDone: 'toggleDone',

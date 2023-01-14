@@ -4,8 +4,8 @@ import React from 'react';
 import { IProps } from './All';
 
 //features
-import { renderTasks } from '../../features/renderTasks';
-import { handleTaskActions } from '../../features/handleTaskActions';
+import { renderTasks } from '../Features/renderTasks';
+import { handleTaskActions } from '../Features/handleTaskActions';
 
 const Done = ({ tasks, setTasks, actions }: IProps) => {
     const doneTasks = tasks.filter((task) => task.isDone);
