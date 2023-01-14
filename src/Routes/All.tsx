@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 
 //interfaces
-import { ITask } from '../App';
-import { IActions } from '../Features/handleTaskActions';
+import { IActions, ITask } from '../Interfaces/interfaces';
 
 export interface IProps {
     tasks: Array<ITask>;
